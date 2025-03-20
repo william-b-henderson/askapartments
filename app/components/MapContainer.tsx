@@ -1,8 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import ListingsDrawer from './ListingsDrawer';
+import { MobileControls } from './MobileControls';
+import { useMediaQuery } from '@/hooks/use-media-query';
+import { PropertyCard } from '@/app/components/PropertyCard';
 
 // Define the Listing type to match what's used in other components
 interface Listing {
@@ -30,8 +33,13 @@ interface MapContainerProps {
 export default function MapContainer({ listings }: MapContainerProps) {
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
   const [mapRef, setMapRef] = useState<mapboxgl.Map | null>(null);
-
-  // Handle selecting a listing from the drawer
+  const [currentView, setCurrentView] = useState<'map' | 'list'>('map');
+  const [listingsOpen, setListingsOpen] = useState(false);
+  
+  // Check if viewport is mobile
+  const isMobile = !useMediaQuery("(min-width: 768px)");
+  
+  // When a listing is selected from drawer, update map
   const handleSelectListing = (listing: Listing) => {
     setSelectedListing(listing);
     
@@ -43,26 +51,100 @@ export default function MapContainer({ listings }: MapContainerProps) {
         essential: true
       });
     }
+    
+    // On mobile, after selecting a listing, open the listings drawer
+    if (isMobile) {
+      setListingsOpen(true);
+    }
   };
+  
+  // Handle mobile view changes
+  const handleViewChange = (view: 'map' | 'list') => {
+    setCurrentView(view);
+    if (view === 'list') {
+      setListingsOpen(true);
+    }
+  };
+  
+  // Reset view when switching between mobile and desktop
+  useEffect(() => {
+    if (!isMobile) {
+      setCurrentView('map');
+      setListingsOpen(false);
+    }
+  }, [isMobile]);
 
+  // Mobile layout
+  if (isMobile) {
+    return (
+      <div className="flex flex-col h-[calc(100vh-64px)]">
+        {/* Show map or list based on current view */}
+        {currentView === 'map' && (
+          <div className="flex-1 relative">
+            <Map 
+              listings={listings} 
+              selectedListing={selectedListing}
+              onSelectListing={setSelectedListing}
+              onMapLoad={setMapRef}
+              isMobile={true}
+            />
+          </div>
+        )}
+        
+        {currentView === 'list' && (
+          <div className="flex-1 overflow-auto p-4">
+            <div className="space-y-4">
+              {listings.map(listing => (
+                <div key={listing.id} onClick={() => handleSelectListing(listing)}>
+                  <PropertyCard 
+                    listing={listing}
+                    isSelected={selectedListing?.id === listing.id}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Mobile controls */}
+        <MobileControls 
+          onViewChange={handleViewChange}
+          currentView={currentView}
+        />
+        
+        {/* Mobile listings drawer */}
+        <ListingsDrawer 
+          listings={listings}
+          selectedListing={selectedListing}
+          onSelectListing={handleSelectListing}
+          isMobile={true}
+          mobileOpen={listingsOpen}
+          onMobileOpenChange={setListingsOpen}
+        />
+      </div>
+    );
+  }
+
+  // Desktop layout
+  console.log('displaying map');
   return (
-    <>
-      {/* Map Component */}
+    <div className="flex flex-1 h-[calc(100vh-64px)] overflow-hidden">
       <div className="flex-1 relative">
         <Map 
           listings={listings} 
           selectedListing={selectedListing}
           onSelectListing={setSelectedListing}
           onMapLoad={setMapRef}
+          isMobile={false}
         />
       </div>
       
-      {/* Listings Drawer */}
       <ListingsDrawer 
         listings={listings}
         selectedListing={selectedListing}
         onSelectListing={handleSelectListing}
+        isMobile={false}
       />
-    </>
+    </div>
   );
 } 

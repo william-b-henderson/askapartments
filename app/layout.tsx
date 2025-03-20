@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from "next/font/google";
+import { cn } from '@/lib/utils';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'San Francisco Map',
-  description: 'Interactive map of San Francisco using Mapbox',
+  title: 'Property Listings Map',
+  description: 'Interactive map of property listings using Mapbox',
 };
 
 export default function RootLayout({
@@ -23,8 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body className={cn(
+        "min-h-screen font-sans antialiased",
+        geistSans.variable,
+        geistMono.variable
+      )}>
+        {children}
+      </body>
     </html>
   );
 }
