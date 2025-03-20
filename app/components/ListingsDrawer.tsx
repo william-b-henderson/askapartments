@@ -56,12 +56,11 @@ export default function ListingsDrawer({
 
   const listingsContent = (
     <>
-      <div className="p-4 border-b">
-        <h2 className="text-xl font-semibold">Available Listings</h2>
+      <div className="p-2 border-b">
         <p className="text-sm text-muted-foreground mt-1">{listings.length} properties found</p>
       </div>
 
-      <ScrollArea className="flex-1 h-[calc(100%-70px)] px-6 py-5">
+      <ScrollArea className="flex-1 h-[calc(100%-70px)]">
         {listings.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <p className="text-muted-foreground">No listings available</p>
@@ -90,13 +89,9 @@ export default function ListingsDrawer({
   // Mobile view uses Sheet component
   if (isMobile) {
     return (
-      <Sheet open={mobileOpen} onOpenChange={onMobileOpenChange}>
-        <SheetContent side="bottom" className="h-[70vh] p-0 rounded-t-xl">
           <div className="flex flex-col h-full">
             {listingsContent}
           </div>
-        </SheetContent>
-      </Sheet>
     );
   }
 

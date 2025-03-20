@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -19,6 +20,9 @@ export function Header() {
         {/* Mobile Navigation */}
         <div className="md:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
+            <VisuallyHidden>
+              <SheetTitle>Menu</SheetTitle>
+            </VisuallyHidden>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />

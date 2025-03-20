@@ -155,21 +155,6 @@ export function PropertyCard({ listing, isSelected, onClick }: PropertyCardProps
                 </span>
               </div>
             )}
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="h-9 px-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/80 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                >
-                  <Info className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>View property details</p>
-              </TooltipContent>
-            </Tooltip>
           </div>
 
           {/* View Details Link */}

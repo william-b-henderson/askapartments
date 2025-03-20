@@ -57,12 +57,8 @@ export default function Map({
   const [showDetails, setShowDetails] = useState(false);
   // Initialize map
   useEffect(() => {
-    console.log("map useEffect");
     if (map.current) return; // initialize map only once
-    console.log("map useEffect 2");
     if (mapContainer.current) {
-      console.log("Initializing map with token:", mapboxgl.accessToken);
-      
       try {
         map.current = new mapboxgl.Map({
           container: mapContainer.current,
@@ -399,12 +395,12 @@ export default function Map({
   }, [selectedListing]);
 
   return (
-    <div className="map-wrapper rounded-lg overflow-hidden shadow-md border border-border">
+    <div className="map-wrapper rounded-lg overflow-hidden shadow-md border border-border h-full">
       <div className="bg-primary text-primary-foreground p-2 flex justify-between items-center">
         <div>Showing {listings.length} listings</div>
       </div>
       
-      <div ref={mapContainer} className="map-container h-[70vh] w-full relative">
+      <div ref={mapContainer} className="map-container h-full w-full relative">
       </div>
       
       {/* Mobile listing detail dialog */}

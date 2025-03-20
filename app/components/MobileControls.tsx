@@ -1,9 +1,10 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
 import { Map, List, SlidersHorizontal } from "lucide-react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 interface MobileControlsProps {
   onViewChange: (view: 'map' | 'list') => void;
@@ -37,6 +38,9 @@ export function MobileControls({ onViewChange, currentView }: MobileControlsProp
         </Button>
         
         <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
+          <VisuallyHidden>
+            <SheetTitle>Filter Properties</SheetTitle>
+          </VisuallyHidden>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="rounded-full ml-1">
               <SlidersHorizontal className="h-4 w-4" />

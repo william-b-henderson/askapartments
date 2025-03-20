@@ -92,18 +92,14 @@ export default function MapContainer({ listings }: MapContainerProps) {
         )}
         
         {currentView === 'list' && (
-          <div className="flex-1 overflow-auto p-4">
-            <div className="space-y-4">
-              {listings.map(listing => (
-                <div key={listing.id} onClick={() => handleSelectListing(listing)}>
-                  <PropertyCard 
-                    listing={listing}
-                    isSelected={selectedListing?.id === listing.id}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          <ListingsDrawer 
+          listings={listings}
+          selectedListing={selectedListing}
+          onSelectListing={handleSelectListing}
+          isMobile={true}
+          mobileOpen={listingsOpen}
+          onMobileOpenChange={setListingsOpen}
+        />
         )}
         
         {/* Mobile controls */}
@@ -112,21 +108,11 @@ export default function MapContainer({ listings }: MapContainerProps) {
           currentView={currentView}
         />
         
-        {/* Mobile listings drawer */}
-        <ListingsDrawer 
-          listings={listings}
-          selectedListing={selectedListing}
-          onSelectListing={handleSelectListing}
-          isMobile={true}
-          mobileOpen={listingsOpen}
-          onMobileOpenChange={setListingsOpen}
-        />
       </div>
     );
   }
 
   // Desktop layout
-  console.log('displaying map');
   return (
     <div className="flex flex-1 h-[calc(100vh-64px)] overflow-hidden">
       <div className="flex-1 relative">
