@@ -46,11 +46,6 @@ export default function Map({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const popupRef = useRef<mapboxgl.Popup | null>(null);
-  const [lng, setLng] = useState(DEFAULT_LONGITUDE);
-  const [lat, setLat] = useState(DEFAULT_LATITUDE);
-  const [zoom, setZoom] = useState(DEFAULT_ZOOM);
-  const [mouseLng, setMouseLng] = useState<number | null>(null);
-  const [mouseLat, setMouseLat] = useState<number | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
   // Initialize map
@@ -94,24 +89,6 @@ export default function Map({
         img.src = svgUrl;
       });
     }
-
-    map.current?.on('move', () => {
-      if (map.current) {
-        setLng(parseFloat(map.current.getCenter().lng.toFixed(4)));
-        setLat(parseFloat(map.current.getCenter().lat.toFixed(4)));
-        setZoom(parseFloat(map.current.getZoom().toFixed(2)));
-      }
-    });
-
-    map.current?.on('mousemove', (e) => {
-      setMouseLng(parseFloat(e.lngLat.lng.toFixed(4)));
-      setMouseLat(parseFloat(e.lngLat.lat.toFixed(4)));
-    });
-
-    map.current?.on('mouseout', () => {
-      setMouseLng(null);
-      setMouseLat(null);
-    });
 
     return () => {
       if (map.current) {
@@ -296,10 +273,6 @@ export default function Map({
   return (
     <div className="map-wrapper">
       <div className="map-info">
-        <div>Map Center: Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}</div>
-        {mouseLng !== null && mouseLat !== null && (
-          <div>Mouse Position: Longitude: {mouseLng} | Latitude: {mouseLat}</div>
-        )}
         <div>Showing {listings.length} listings</div>
       </div>
       <div ref={mapContainer} className="map-container" />
