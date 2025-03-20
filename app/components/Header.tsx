@@ -14,7 +14,7 @@ export function Header() {
     <header className="bg-card text-card-foreground shadow-sm border-b">
       <div className="container mx-auto py-5 px-6 flex items-center justify-between">
         <Link href="/" className="font-bold text-xl flex items-center gap-3">
-          <span>Property Listings Map</span>
+          <span>Rent in SF</span>
         </Link>
         
         {/* Mobile Navigation */}

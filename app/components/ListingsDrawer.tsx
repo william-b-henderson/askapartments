@@ -54,6 +54,8 @@ export default function ListingsDrawer({
     }
   }, [selectedListing]);
 
+  console.log("ListingsDrawer rendering with", listings.length, "listings");
+
   const listingsContent = (
     <>
       <div className="p-2 border-b">

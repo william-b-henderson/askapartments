@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Property Listings Map',
-  description: 'Interactive map of property listings using Mapbox',
+  title: 'Rent in SF',
+  description: 'Interactive map of Rental Properties in San Francisco',
 };
 
 export default function RootLayout({

@@ -125,12 +125,14 @@ export default function MapContainer({ listings }: MapContainerProps) {
         />
       </div>
       
-      <ListingsDrawer 
-        listings={listings}
-        selectedListing={selectedListing}
-        onSelectListing={handleSelectListing}
-        isMobile={false}
-      />
+      <div className="w-96 h-full flex-shrink-0">
+        <ListingsDrawer 
+          listings={listings}
+          selectedListing={selectedListing}
+          onSelectListing={handleSelectListing}
+          isMobile={false}
+        />
+      </div>
     </div>
   );
 } 
