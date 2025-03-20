@@ -61,7 +61,7 @@ export default function ListingsDrawer({
         <p className="text-sm text-muted-foreground mt-1">{listings.length} properties found</p>
       </div>
 
-      <ScrollArea className="flex-1 p-4">
+      <ScrollArea className="flex-1 h-[calc(100%-70px)] p-4">
         {listings.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <p className="text-muted-foreground">No listings available</p>
