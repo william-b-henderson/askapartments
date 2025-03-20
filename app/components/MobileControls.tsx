@@ -15,11 +15,11 @@ export function MobileControls({ onViewChange, currentView }: MobileControlsProp
   
   return (
     <div className="fixed bottom-4 left-0 right-0 z-10 flex justify-center md:hidden">
-      <div className="bg-background/80 backdrop-blur-md rounded-full border shadow-md p-1 flex items-center">
+      <div className="bg-background/80 backdrop-blur-md rounded-full border shadow-md p-2 flex items-center">
         <Button
           variant={currentView === 'map' ? 'default' : 'ghost'}
           size="sm"
-          className="rounded-full"
+          className="rounded-full px-4"
           onClick={() => onViewChange('map')}
         >
           <Map className="h-4 w-4 mr-2" />
