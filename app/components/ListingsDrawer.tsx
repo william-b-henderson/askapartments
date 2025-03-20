@@ -60,13 +60,13 @@ export default function ListingsDrawer({
         <p className="text-sm text-muted-foreground mt-1">{listings.length} properties found</p>
       </div>
 
-      <ScrollArea className="flex-1 h-[calc(100%-70px)]">
+      <ScrollArea className="flex-1 h-[calc(100%-70px)] pl-2 pr-4">
         {listings.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <p className="text-muted-foreground">No listings available</p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-2">
             {listings.map((listing) => (
               <div
                 key={listing.id}

@@ -395,12 +395,8 @@ export default function Map({
   }, [selectedListing]);
 
   return (
-    <div className="map-wrapper rounded-lg overflow-hidden shadow-md border border-border h-full">
-      <div className="bg-primary text-primary-foreground p-2 flex justify-between items-center">
-        <div>Showing {listings.length} listings</div>
-      </div>
-      
-      <div ref={mapContainer} className="map-container h-full w-full relative">
+    <div className="map-wrapper rounded-lg overflow-hidden shadow-md border border-border h-full flex flex-col">
+      <div ref={mapContainer} className="map-container flex-1 w-full relative">
       </div>
       
       {/* Mobile listing detail dialog */}

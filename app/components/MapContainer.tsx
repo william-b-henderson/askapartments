@@ -115,7 +115,7 @@ export default function MapContainer({ listings }: MapContainerProps) {
   // Desktop layout
   return (
     <div className="flex flex-1 h-[calc(100vh-64px)] overflow-hidden">
-      <div className="flex-1 relative">
+      <div className="flex-1 h-full relative">
         <Map 
           listings={listings} 
           selectedListing={selectedListing}
